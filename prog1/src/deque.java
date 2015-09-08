@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class deque{
 	private dequeNode elts;
 	
@@ -34,7 +37,8 @@ public class deque{
 		
 	}
 	
-	public void printDeque(){
+	public void printDeque(String path) throws IOException{
+		FileWriter writer = new FileWriter(path);
 		
 	}
 	
