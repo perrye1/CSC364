@@ -1,0 +1,9 @@
+IF 1
+IR 2
+IR 3
+IF 4
+PR
+IR 5
+IF 6
+DR
+PR
