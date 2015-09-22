@@ -17,7 +17,7 @@ public class BSTmain{
 		
 		//create a new file reader and writer
 		BufferedReader reader = new BufferedReader(new FileReader(inPath));
-		BufferedWriter writer = new BufferedWriter(new FileWriter(outPath));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(outPath, true));
 
 		String line = null;
 		
