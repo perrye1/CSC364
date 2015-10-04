@@ -8,7 +8,7 @@ public class HeapDriver{
 	
 	public static void main(String[] args) throws IOException{
 		
-		//create a new BST
+		//create a new Heap
 		Heap myHeap = new Heap();
 		
 		//file paths for the input and output files
@@ -24,17 +24,18 @@ public class HeapDriver{
 		//read in each line in the input file
 		while ((line = reader.readLine()) != null) {
 			
-			//insert each value from the input file into the BST
+			//insert each value from the input file into the heap
 			myHeap.insert(Integer.parseInt(line));
 			
 		}
 	
-		//print out the level order traversal
+		//print out the sorted heap
 		if(myHeap.isEmpty()){
 			writer.write("EMPTY HEAP");
 		}else{
 			while(!myHeap.isEmpty()){
 				writer.write(Integer.toString(myHeap.deleteMin()));
+				writer.write("\r\n");
 			}
 		}
 		
