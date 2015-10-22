@@ -1,0 +1,4 @@
+This file contains a number of
+Different
+words. It has some common elements with the
+next file. A total of five words are in common.
