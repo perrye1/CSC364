@@ -18,24 +18,30 @@ public class HashDriver {
 		String inPath2 = "E:\\SchoolWork\\CSC364\\prog4\\IO\\inf2.txt";
 		String outPath = "E:\\SchoolWork\\CSC364\\prog4\\IO\\outf1.txt";
 
-		// create a new file reader and writer
+		// create new file readers and writers
 		BufferedReader reader = new BufferedReader(new FileReader(inPath));
 		BufferedReader reader2 = new BufferedReader(new FileReader(inPath2));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(outPath, true));
 
 		String line = null;
 		ArrayList<String> commonWords = new ArrayList<String>();
+		ArrayList<String> uniqueWords = new ArrayList<String>();
 
-		// read in each line in the input file
+		// read in each line in the input file, strip out punctuation and words shorter than
+		// 3 characters, then add it to the hash table only if it is unique. 
 		while ((line = reader.readLine()) != null) {
 			String[] words = line.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
 			for (String w : words) {
-				if (w.length() >= 3) {
+				if (w.length() >= 3 && !uniqueWords.contains(w)) {
 					myTable.insert(w);
+					uniqueWords.add(w);
 				}
 			}
 		}
-
+		
+		// read in each line in the input file, strip out punctuation and words shorter than
+		// 3 characters, then look it up in the hash table and mark the location where it was found
+		// with a special character.
 		while ((line = reader2.readLine()) != null) {
 			String[] words = line.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
 			for (String w : words) {
@@ -49,13 +55,15 @@ public class HashDriver {
 			}
 		}
 
+		// sort the array of common words alphabetically 
 		Collections.sort(commonWords);
 		
+		// write out all the common words to the output file
 		for(String w : commonWords){
-			writer.write(w);
+			writer.write(w + "\r\n");
 		}
 		
-		// close the file reader and writer
+		// close the file readers and writers
 		reader.close();
 		reader2.close();
 		writer.close();
