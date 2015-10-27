@@ -50,5 +50,4 @@ public class HashTable{
 		}
 		table[hashAddress] = word;
 	}
-
 }
