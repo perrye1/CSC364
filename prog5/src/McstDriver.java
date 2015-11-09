@@ -21,7 +21,8 @@ public class McstDriver {
 			myGraph.insert(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]));
 		}
 		
-		System.out.println("Number of vertices is " + myGraph.getNumVertices());
+		//myGraph.printGraph();
+		
 		int totalCost = myGraph.primsAlg();
 		System.out.println("Total cost of MCST is " + totalCost );
 		

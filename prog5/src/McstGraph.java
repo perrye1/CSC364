@@ -1,27 +1,44 @@
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class McstGraph {
 	private EdgeNode[] edgeList;
 	private int numVertices;
-	
-	public McstGraph(int n){
+
+	public McstGraph(int n) {
 		this.numVertices = n;
 		this.edgeList = new EdgeNode[n];
-		Arrays.fill(this.edgeList, new EdgeNode(-1,-1,0));
+		for (int x = 0; x < n; x++) {
+			EdgeNode dummyEdge = new EdgeNode(-1, -1, 0);
+			edgeList[x] = dummyEdge;
+		}
 	}
-	
-	public void insert(int x, int y, int w){
-		EdgeNode edge = new EdgeNode(x, y, w);
-		edge.setNext(this.edgeList[x].getNext());
-		this.edgeList[x].setNext(edge);
+
+	public void insert(int x, int y, int w) {
+		EdgeNode edge1 = new EdgeNode(x, y, w);
+		EdgeNode edge2 = new EdgeNode(y, x, w);
+		edge1.setNext(this.edgeList[x].getNext());
+		this.edgeList[x].setNext(edge1);
+		edge2.setNext(this.edgeList[y].getNext());
+		this.edgeList[y].setNext(edge2);
 	}
-	
-	public int getNumVertices(){
+
+	public int getNumVertices() {
 		return this.numVertices;
 	}
-	
+
+	public void printGraph() {
+		for (int x = 0; x < this.numVertices; x++) {
+			EdgeNode a = this.edgeList[x].getNext();
+			System.out.print(x);
+			while (a != null) {
+				System.out.print(" --> " + a.getAdjacentVertex());
+				a = a.getNext();
+			}
+			System.out.println("");
+		}
+	}
+
 	public int primsAlg() {
 		int totalCost = 0;
 
@@ -38,7 +55,7 @@ public class McstGraph {
 		while (!unvisited.isEmpty()) {
 			for (int v : visited) {
 				EdgeNode a = this.edgeList[v];
-				while (a.getNext() != null) {
+				while (a != null) {
 					if (unvisited.contains(a.getAdjacentVertex())) {
 						currentEdges.add(a);
 					}
