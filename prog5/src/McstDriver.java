@@ -10,19 +10,21 @@ public class McstDriver {
 		// create new file reader and writers
 		BufferedReader reader = new BufferedReader(new FileReader(inPath));
 
+		// read in the number of vertices and number of edges
 		int nv = Integer.parseInt(reader.readLine());
 		int ne = Integer.parseInt(reader.readLine());
 		String line = "";
 		
+		// create a new graph object
 		McstGraph myGraph = new McstGraph(nv); 
 
+		// read in the edges and insert them into the graph
 		while ((line = reader.readLine()) != null) {
 			String[] values = line.split(" ");
 			myGraph.insert(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]));
 		}
 		
-		//myGraph.printGraph();
-		
+		// run Prim's algorithm on the graph, to find the MCST
 		int totalCost = myGraph.primsAlg();
 		System.out.println("Total cost of MCST is " + totalCost );
 		
